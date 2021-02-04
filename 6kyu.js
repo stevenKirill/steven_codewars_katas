@@ -303,4 +303,21 @@ function isPangram(string) {
     const uniq = [...new Set(array)].join('');
     console.log(uniq)
     return uniq === alphabet;
-}
+};
+
+//Find the nth Reverse Number https://www.codewars.com/kata/600bfda8a4982600271d6069/train/javascript
+
+function findReverseNumber(n) {
+    let counter = 0;
+    for(let i = 0;; i++) {
+        if (isPalindrom(String(i))) {
+            counter++;
+            if (counter === n) {
+                return i;
+            }
+        }
+    }
+};
+function isPalindrom(num) {
+    return [...num].reverse().join('') === num;
+};
