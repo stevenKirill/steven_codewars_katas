@@ -182,3 +182,19 @@ function add(n) {
     }
     return inner; //  только на первом шаге
 };
+
+// Memoized Fibonacci https://www.codewars.com/kata/529adbf7533b761c560004e5
+function fibonacci(n,memo = {}) {
+    if (n === 0) {
+      return 0
+    };
+    
+    if (memo[n]) {
+        return memo[n]
+    };
+
+    if (n <= 2) {
+      return 1
+    };
+    return memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo)
+};

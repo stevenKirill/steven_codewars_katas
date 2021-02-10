@@ -122,9 +122,106 @@ function filter(array,fn) {
 };
 const arrayNum = [1,2,3,4,5];
 function isEven(x) { return x % 2 == 0; };
-// console.log(filter(arrayNum,isEven))
 
 //Напиши функцию, считающую число свойств в объекте:
 function countProps(object) {
     return Object.keys(object).length;
 };
+
+// продвинутая реализация curry c 5 аргументами
+function curry(fn) {
+    return function curried(...args) {
+        if(args.length >= fn.length) {
+            return fn.apply(this, args)
+        } else {
+            return function(...args2) {
+                return curried.apply(this, args.concat(args2))
+            }
+        }
+    }
+}
+
+// пример функции суммы которую будем каррировать
+function sumNums(a,b,c,d,e) {
+    return a + b + c + d + e
+}
+
+var curriedFunc = curry(sumNums);
+curriedFunc(1,2)(3,4)(5);
+
+// бесконченая curry chain по одному аргументу
+
+function chainSum(x) {
+    let counter = x;
+    return function adder(y) {
+        counter += y;
+        adder.result = counter;
+        return adder
+    }
+};
+chainSum(1)(2)(3)(4)(10)(100).result;
+
+// функции это объекты и у них есть методы =>> метод valuoOf преобразует функцию в 
+// примитив в число а toString преобразует функцию в строку
+
+function chainSum2(x) {
+    let counter = x;
+    function adder(y) {
+        counter += y;
+        return adder
+    }
+    adder.valueOf = function() {
+        return counter;
+    }
+    return adder
+};
+chainSum2(10)(10)(10).valueOf();
+
+// inherit функция наследования
+function inherit(parent, child) {
+    const Temp = function() {};
+    Temp.prototype = parent.prototype;
+    child.prototype = new Temp();
+}
+
+const F = function(arg) {
+    this.arg = arg;
+};
+F.prototype.name = 'Steven';
+F.prototype.logOne = function() {
+    console.log(1)
+}
+const F2 = function(arg2) {
+    this.arg2 = arg2;
+};
+
+inherit(F,F2);
+
+F2.prototype.logOne = function() {
+    console.log(1,'and this is F2')
+}
+
+const f1 = new F('Argument');
+const f2 = new F2('Argument2');
+f2.logOne()
+f1.logOne()
+
+// декларативная реализация flattenArray
+function declarativeFlatten(array,result = []) {
+    for(let i = 0, length = array.length; i < length; i++) {
+        const value = array[i];
+        if(Array.isArray(value)) {
+             declarativeFlatten(value,result)
+        } else {
+            result.push(value)
+        }
+    }
+    return result;
+}
+// функциональная реализация flattenArray
+function functionalFlatten(array) {
+    return array.reduce((acc,curr) => {
+        return Array.isArray(curr) ? 
+        acc.concat(functionalFlatten(curr)) : acc.concat(curr)
+    },[])
+}
