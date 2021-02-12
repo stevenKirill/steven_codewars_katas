@@ -224,4 +224,20 @@ function functionalFlatten(array) {
         return Array.isArray(curr) ? 
         acc.concat(functionalFlatten(curr)) : acc.concat(curr)
     },[])
+};
+
+//Реализовать алгоритм сжатия строки "AAADDDGFFFAAR" → "3A3DG3F2AR"
+// Собеседование Сбербанк (не очень красивое решение)
+function convertString(str) {
+    let resultStr = '';
+    let counter = 0;
+    for(let i = 0; i < str.length; i++) {
+        if(str[i] === str[i + 1]) {
+            counter++;
+        } else {
+            resultStr += `${counter+1}${str[i]}`;
+            counter = 0;
+        }
+    }
+    return [...resultStr].filter(char => char !== '1').join('')
 }
