@@ -241,3 +241,15 @@ function convertString(str) {
     }
     return [...resultStr].filter(char => char !== '1').join('')
 }
+
+// создать массив случайных чисел от 1 до 200 чтобы они не повторялись
+function getRandomArray() {
+    const result = [];
+    while(result.length < 100) {
+        const rand = Math.floor(Math.random() * (200 - 1) + 1);
+        if(!result.includes(rand)) {
+            result.push(rand)
+        }
+    }
+    return result
+}

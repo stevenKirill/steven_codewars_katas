@@ -321,3 +321,48 @@ function findReverseNumber(n) {
 function isPalindrom(num) {
     return [...num].reverse().join('') === num;
 };
+
+function compress(str) {
+    const compressed = helper(str);
+    return compressed.length > str.length ? str : compressed;
+};
+
+function helper(str) {
+    let counter = 0;
+    let compressed = '[';
+    str.split('').forEach((char,index,array) => {
+        if (char === array[index + 1]) {
+            counter++;
+        } else {
+            compressed += `[${counter+1},"${char}"],`;
+            counter = 0;
+            return array;
+        }
+    })
+    compressed = compressed.slice(0,-1);
+    compressed += ']';
+    return compressed;
+}
+function decompressed(compressed) {
+    let comp = helper(compressed);
+    if (comp !== compressed) {
+        return compressed
+    } else {
+        let decomp = '';
+        compressed.split(']')
+        .filter(value => value)
+        .map((string) => {
+            return string.match(/[0-9A-Z]/ig).join('')
+        })
+        .forEach((char) => {
+            const letter = char.match(/[A-Z]/ig).join('');
+            const number = Number(char.match(/[0-9]/ig).join(''));
+            decomp += letter.repeat(number);
+        })
+        return decomp
+    }
+}
+// console.log(decompressed('[[14,"a"],[1,"b"],[41,"a"],[1,"c"]]'))
+// '[[14,a][1,b][41,a][1,c]]'
+// '[[14,"a"],[1,"b"],[41,"a"],[1,"c"]]' 
+// '[[14,"a"][1,"b"][41,"a"][1,"c"]]'
