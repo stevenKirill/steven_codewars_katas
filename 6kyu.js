@@ -322,6 +322,7 @@ function isPalindrom(num) {
     return [...num].reverse().join('') === num;
 };
 
+// Basic compression https://www.codewars.com/kata/5914e068f05d9a011e000054
 function compress(str) {
     const compressed = helper(str);
     return compressed.length > str.length ? str : compressed;

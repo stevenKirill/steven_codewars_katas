@@ -253,3 +253,57 @@ function getRandomArray() {
     }
     return result
 }
+// функция throttle тормозилка
+function throttle(f,wait) {
+    let arrest = false;
+    let lastPostPonedCall = false;
+    let lastContext, lastArgs;
+    let lastResult;
+
+    const invokeFunc = (context, args) => {
+        lastResult = f.apply(context,args); 
+        arrest = true;
+
+        setTimeout(() => {
+            arrest = false;
+            if (lastPostPonedCall) {
+                invokeFunc(lastContext,lastArgs);
+                lastContext = undefined;
+                lastArgs = undefined;
+                lastPostPonedCall = false;
+            }
+        },wait);
+    }
+
+    return function(...args) {
+        if(!arrest) {
+            invokeFunc(this,args)
+        } else {
+            lastPostPonedCall = true;
+            lastContext = this;
+            lastArgs = args
+        }
+        return lastResult;
+    }
+};
+
+// test throttle function
+function work(arg) {
+    return arg;
+}
+
+const func = throttle(work,100);
+
+func('A')
+
+setTimeout(() => {
+    func('B')
+},50);
+
+setTimeout(() => {
+    func("C")
+},75);
+
+setTimeout(() => {
+    func("D")
+},110);
