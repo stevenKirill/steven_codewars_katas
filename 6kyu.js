@@ -343,7 +343,8 @@ function helper(str) {
     compressed = compressed.slice(0,-1);
     compressed += ']';
     return compressed;
-}
+};
+
 function decompressed(compressed) {
     let comp = helper(compressed);
     if (comp !== compressed) {
@@ -362,8 +363,32 @@ function decompressed(compressed) {
         })
         return decomp
     }
-}
+};
+
 // console.log(decompressed('[[14,"a"],[1,"b"],[41,"a"],[1,"c"]]'))
 // '[[14,a][1,b][41,a][1,c]]'
 // '[[14,"a"],[1,"b"],[41,"a"],[1,"c"]]' 
 // '[[14,"a"][1,"b"][41,"a"][1,"c"]]'
+
+// Valid Braces https://www.codewars.com/kata/5277c8a221e209d3f6000b56
+function validBraces(braces) {
+  const stack = [];
+  for(const symbol of braces) {
+      if(symbol === '[' || symbol === '{' || symbol === '(') {
+          stack.push(symbol);
+      } else if (symbol === ')') {
+          if(stack.pop() !== '(') {
+              return false;
+          }
+      } else if (symbol === '}') {
+          if(stack.pop() !== '{') {
+              return false;
+          }
+      } else if (symbol === ']') {
+          if(stack.pop() !== '[') {
+              return false;
+          }
+      }
+  }
+  return stack.length === 0;
+};
