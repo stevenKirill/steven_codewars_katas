@@ -307,3 +307,28 @@ setTimeout(() => {
 setTimeout(() => {
     func("D")
 },110);
+
+// Полифилл функции BIND кастомная реализация
+ Function.prototype.myBind = function(...args) {
+     const instance = this;
+     const context = args[0];
+     const otherArguments = args.slice(1);
+     return function(...args2) {
+         instance.apply(context,[...otherArguments,...args2])
+     }
+ };
+
+ let my = {
+     num: '1',
+ };
+
+ function logger(...args) {
+     console.log(this.num)
+     const arr = Array.from(args);
+     arr.push(this.num);
+     console.log(arr);
+ }
+
+ let boundLogger = logger.myBind(my,'2');
+
+ boundLogger('3','4','5')
