@@ -332,3 +332,24 @@ setTimeout(() => {
  let boundLogger = logger.myBind(my,'2');
 
  boundLogger('3','4','5')
+
+ /** Банк открытие собес
+  * 
+  Необходимо написать функцию, создающую пространство имен.
+  На вход подается строка вида: "a.b.c.d.e", 
+  на выходе ожидаем получить вложенные друг в друга объекты.
+
+  **/
+
+  function namespace(str) {
+    const array = str.split('.');
+    const result = {};
+    let current = result;
+    for(let i = 0; i < array.length; i++) {
+      current[array[i]] = {};
+      current = current[array[i]];
+    }
+    return result;
+  }
+
+  console.log(namespace('a.b.c.d.e')); // {"a":{"b":{"c":{"d":{"e":{}}}}}
