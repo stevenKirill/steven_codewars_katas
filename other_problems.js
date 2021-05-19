@@ -353,3 +353,19 @@ setTimeout(() => {
   }
 
   console.log(namespace('a.b.c.d.e')); // {"a":{"b":{"c":{"d":{"e":{}}}}}
+
+
+// Функция debounce.
+const debounce = (func, wait) => {
+    let timeout;
+  
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+  
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+};
