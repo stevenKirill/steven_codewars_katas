@@ -369,3 +369,44 @@ const debounce = (func, wait) => {
       timeout = setTimeout(later, wait);
     };
 };
+
+// Сравни ру
+function compressString(str) {
+    let result = '';
+    let counter = 1;
+  
+  for(let i = 0; i < str.length; i++) {
+    if(str[i] !== str[i+1]) {
+      result += str[i] + (counter === 1 ? '' : counter);
+      counter = 1
+    } else {
+      counter++
+    }
+  }
+  return result
+};
+
+// сравни ру
+const arrayForAnagram = [
+    "БОДРЯЧОК",
+    "ДОБРЯЧОК",
+    "КАНИСТРА",
+    "СТАРИКАН",
+    "СТАРИНКА",
+    "ВСЕПРОЩЕНИЕ",
+    "ПРОСВЕЩЕНИЕ",
+    "java",
+    "javascript",
+];
+// результат должен быть следующим
+// [
+//     ['БОДРЯЧОК','ДОБРЯЧОК'],
+//     ['КАНИСТРА','СТАРИКАН','СТАРИНКА'],
+//     ['ВСЕПРОЩЕНИЕ','ПРОСВЕЩЕНИЕ'],
+//     ['java'],
+//     ['javascript']
+// ]
+function anagramFunction(array) {
+    // solution
+};
+console.log(anagramFunction(arrayForAnagram))
