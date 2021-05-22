@@ -407,6 +407,32 @@ const arrayForAnagram = [
 //     ['javascript']
 // ]
 function anagramFunction(array) {
-    // solution
+    // Есть проблема с повторящимися массива в этой решении он возвращает исключитльно
+    // для каждого слова массив анаграм даже если мы уже посчитали до этого
+    // тут нужна оптимизация не знаю как проверить этот кейс
+    const resultArray = [];
+    for(let i = 0; i < array.length; i++) {
+        const inner = [array[i],...checkForAnagram(array[i],[...array.slice(0,i),...array.slice(i+1)])];
+        resultArray.push(inner)
+    }
+    return resultArray;
 };
+
+function checkForAnagram(word, array) {
+    let res = [];
+    for(let i = 0; i < array.length; i++) {
+        let counter = 0;
+        for(let j = 0; j < word.length; j++) {
+            if(array[i].includes(word[j])) {
+                counter++;
+            }
+            if(counter === array[i].length && array[i].length === word.length) {
+                res.push(array[i])
+                counter = 0
+            }
+        }
+        counter = 0;
+    }
+    return res;
+}
 console.log(anagramFunction(arrayForAnagram))
