@@ -436,3 +436,34 @@ function checkForAnagram(word, array) {
     return res;
 }
 console.log(anagramFunction(arrayForAnagram))
+
+// Есть массив элементов. Нужно написать функцию которая принимает этот массив
+// и принимает объектов параметров в котором есть номер страницы и количество элементов
+// создай новый массив из исходного длиной параметра количества элементов со смещением
+// на количество страниц слева
+
+const exampleArray = Array.from({length: 349},(_,i) => ++i);
+
+function pagination(array,params) {
+    const {page, count} = params;
+    const lastPageNumber = Math.ceil(array.length / count)
+    const rest = array.length % count;
+    if (lastPageNumber < page) {
+        return `The last possible page number is ${lastPageNumber}`
+    }
+    if(page === 1) {
+        return array.slice(0,count)
+    }
+    for(let i = 0, j = 1; i < array.length; i+=count, j++) {
+        if (j === page && page === lastPageNumber) {
+            return array.slice(i-1,i+rest)
+        }
+        if(j === page && page !== lastPageNumber) {
+            return array.slice(i-1,i+count)
+        }
+    }
+}
+console.log('result',pagination(exampleArray, {
+    page: 4,
+    count: 100,
+}))
