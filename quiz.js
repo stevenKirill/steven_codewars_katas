@@ -9,6 +9,14 @@ function hi(name) {
     return `Hello ${this(name)}!`
 }
 
+const fi2 = (arr) => arr.join(' ');
+
+function hi2(...name) {
+  return `Hello ${this(name)}!`;
+};
+
+console.log(hi2.apply(fi2, ['Tom', 'John', 'Ben']));
+
 // 2) С помощью какого оператора можно получить результат 3 ?
 
 const values = [NaN, null, undefined, false];
