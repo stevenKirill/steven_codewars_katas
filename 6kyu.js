@@ -392,3 +392,48 @@ function validBraces(braces) {
   }
   return stack.length === 0;
 };
+
+// Roman Encoder codewars.com/kata/51b62bf6a9c58071c600001b/train/javascript
+function convertToRoman(num) {
+    var roman = {
+      M: 1000,
+      CM: 900,
+      D: 500,
+      CD: 400,
+      C: 100,
+      XC: 90,
+      L: 50,
+      XL: 40,
+      X: 10,
+      IX: 9,
+      V: 5,
+      IV: 4,
+      I: 1
+    };
+    let result = '';
+  
+    for (let i of Object.keys(roman)) {
+      const q = Math.floor(num / roman[i]);
+      num -= q * roman[i];
+      result += i.repeat(q);
+      console.log(result, '=> resu')
+    }
+  
+    return result;
+  }
+
+// console.log(romanEncoder(1000)) // M
+console.log(convertToRoman(1550)) // 1000 500 50 => MDL
+// 1550 
+// [M,D,C,L,X,V,I]
+// 1550 / 1000 = 1
+// 1550 - 1 * 1000 = 550
+// 550 / 500 = 1
+// 550 - 1 * 500 = 50
+// 50 / 100 = 0,5 => 0
+// 50 - 0 * 100 = 50
+// 50 / 50 = 1;
+// 50 - 50 * 1 = 0
+// 0
+// console.log(convertToRoman(1763)) /// MDCCLXIII
+// console.log(convertToRoman(247)) /// 100 + 100 + 10 + 10 + 10 + 10 + 5 + 1 + 1 CCXXXXVII
