@@ -1,0 +1,23 @@
+{
+  "name": "steven_codewars_katas",
+  "version": "1.0.0",
+  "description": "Repository of my katas form Codewars",
+  "main": "quiz.js",
+  "scripts": {
+    "compile": "tsc --build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevenKirill/steven_codewars_katas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stevenKirill/steven_codewars_katas/issues"
+  },
+  "homepage": "https://github.com/stevenKirill/steven_codewars_katas#readme",
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+}
