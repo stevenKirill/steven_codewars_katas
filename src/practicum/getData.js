@@ -17,28 +17,18 @@ function memoize(f, cacheTime) {
   let cache = {};
   let cacheTimeExpired = Date.now() + cacheTime;
   return function() {
-    let currentTime = Date.now();
-    return new Promise((resolve) => {
-      if (cache.result) {
-          if (currentTime < cacheTimeExpired) {
-              resolve(cache.result);
-          } else {
-              f().then((data) => {
-                  cache.result = data;
-                  resolve(data);
-              })
-          }
-      } else {
-          f().then((data) => {
-              cache.result = data;
-              resolve(data)
-          })
-      }
-    })
+    if (!cache.result || Date.now() > cacheTimeExpired) {
+      return f().then((data) => {
+        cache.result = data;
+        cacheTimeExpired = Date.now() + cacheTime;
+        return data;
+      })
+    }
+    return Promise.resolve(cache.result);
   }
 }
 
-const memoized = memoize(getData, 3000);
+const memoized = memoize(getData, 1000);
 
 memoized()
 	.then(data1 => console.log(data1)) // получаем долго
