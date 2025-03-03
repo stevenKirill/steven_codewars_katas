@@ -48,6 +48,7 @@ console.log('script  end')
 // promise1
 // promise2
 // setTimeout
+
 /////////////////////////////////////
 
 function printing() {
@@ -71,9 +72,23 @@ function greet(person) {
 greet({ name: 'amy' })
 
 ///////////////////////////////////
+
 for (var i = 0; i < 4; i++) {
   setTimeout(() => console.log(i), 0)
 }
+
+// С var:                    С let:
+// ┌─────────────┐          ┌─────────────┐
+// │ scope       │          │ scope       │
+// │             │          │ ┌─────────┐ │
+// │ var i = 4   │          │ │ let i=0 │ │
+// │             │          │ └─────────┘ │
+// │ setTimeout  │──┐       │ setTimeout  │
+// │ setTimeout  │──┼──все  │ ┌─────────┐ │
+// │ setTimeout  │──┼──видят│ │ let i=1 │ │
+// │ setTimeout  │──┘  4    │ └─────────┘ │
+// │             │          │ setTimeout  │
+// └─────────────┘          └─────────────┘
 
 /////////////////////////////////////
 
@@ -117,3 +132,40 @@ console.log('0' == [])
 
 ////////////////////////////////////
 
+let obj1 = { key: 'value' };
+let obj2 = obj1;
+let obj3 = obj2;
+
+obj1.key = 'new value';
+obj2 = { key: 'another value' };
+
+console.log(obj1.key, obj2.key, obj3.key);
+
+////////////////////////////////////
+
+let a = {};
+let b = { key: "b" };
+let c = { key: "c" };
+
+a[b] = 123;
+a[c] = 456;
+
+console.log(a[b]);
+
+////////////////////////////////////
+
+(() => {
+  const obj = {
+    a: "foo",
+    b: function () {
+      console.log(this.a);
+    },
+  };
+
+  const c = obj.b;
+
+  obj.b();
+  c();
+})()
+
+////////////////////////////////////
