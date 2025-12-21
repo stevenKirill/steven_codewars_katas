@@ -259,6 +259,8 @@ function convertString(str) {
   return [...resultStr].filter((char) => char !== "1").join("");
 }
 
+console.log(convertString("AAADDDGFFFAAR")); // 3A3DG3F2AR
+
 // создать массив случайных чисел от 1 до 200 чтобы они не повторялись
 function getRandomArray() {
   const result = [];
@@ -385,6 +387,8 @@ const debounce = (func, wait) => {
     timeout = setTimeout(later, wait);
   };
 };
+
+debounce(console.log, 1000)("test");
 
 // Сравни ру
 function compressString(str) {

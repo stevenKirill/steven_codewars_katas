@@ -13,7 +13,7 @@ module.exports = function () {
 
       let acc = accInitial !== undefined ? accInitial : this[0]
       let start = accInitial !== undefined ? 0 : 1;
-      
+
       for (let i = start; i < this.length; i++) {
         acc = callback(acc, this[i]);
       }
@@ -22,3 +22,5 @@ module.exports = function () {
     };
   }
 };
+
+// Метод myReduce() применяет функцию callback к каждому элементу массива (слева-направо), возвращая одно результирующее значение.

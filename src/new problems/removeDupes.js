@@ -1,6 +1,6 @@
 // удаление всех повторяющихся значений
 function removeDupes(str) {
-    return [...new Set(str)].join('');
+  return [...new Set(str)].join('');
 };
 
 console.log(removeDupes('abc'));

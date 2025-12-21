@@ -33,6 +33,15 @@ function splitStrings(str) {
   return result;
 }
 
+function splitStrings(str) {
+  const arr = [];
+  for (let i = 0; i < str.length; i += 2) {
+    const second = str[i + 1] || "_";
+    arr.push(str[i] + second);
+  }
+  return arr;
+}
+
 // Basics 08: Find next higher number with same Bits (1's) => https://www.codewars.com/kata/56bdd0aec5dc03d7780010a5
 
 function nextHigher(n) {
@@ -408,6 +417,12 @@ function validBraces(braces) {
   }
   return stack.length === 0;
 }
+
+// "(){}[]"   =>  True
+// "([{}])"   =>  True
+// "(}"       =>  False
+// "[(])"     =>  False
+// "[({})](]" =>  False
 
 // Roman Encoder codewars.com/kata/51b62bf6a9c58071c600001b/train/javascript
 function convertToRoman(num) {
