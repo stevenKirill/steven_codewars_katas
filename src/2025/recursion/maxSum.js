@@ -32,15 +32,47 @@ const root = {
   },
 };
 
+const second = {
+  "value": 5,
+  "left": {
+    "value": 4,
+    "left": {
+      "value": -80,
+      "left": null,
+      "right": null
+    },
+    "right": {
+      "value": -60,
+      "left": null,
+      "right": null
+    }
+  },
+  "right": {
+    "value": 10,
+    "left": {
+      "value": -90,
+      "left": null,
+      "right": null
+    },
+    "right": null
+  }
+};
+
 console.log(maxSum(root)); // 1 + 2 + 9 === 12
+
+console.log(maxSum(second)); // -51
 
 function maxSum(object) {
   if (object === null) {
-    return 0;
+    return -Infinity;
   }
 
-  const leftSum = object.left ? maxSum(object.left) : 0;
-  const rightSum = object.right ? maxSum(object.right) : 0;
+  if (object.left === null && object.right === null) {
+    return object.value;
+  }
+
+  const leftSum = maxSum(object.left);
+  const rightSum = maxSum(object.right);
 
   return object.value + Math.max(leftSum, rightSum);
 }
