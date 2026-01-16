@@ -66,4 +66,5 @@ function combos(n) {
   return result;
 }
 
-combos(3) // [ [ 3 ], [ 1, 1, 1 ], [ 1, 2 ] ]
+combos(3); // [ [ 3 ], [ 1, 1, 1 ], [ 1, 2 ] ]
+

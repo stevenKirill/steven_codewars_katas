@@ -1,4 +1,3 @@
-
 // Реализуйте класс ATM, реализущий логику работы банкомата.
 
 // У класса необходимо реализовать два метода:
@@ -25,9 +24,59 @@ class ATM {
   }
 
   withdraw(amount) {
-    console.log(amount, this.obj)
+    const denominations = Object.keys(this.obj).map(x => Number(x)).sort((a, b) => b - a);
+
+    // [ 1000, 500, 200, 50, 10 ]
+
+    function helper(amountLeft, currentNominalIndex, availableNominal) {
+      if (amountLeft === 0) {
+        return {};
+      }
+      if (currentNominalIndex >= denominations.length) {
+        throw new Error(' невозможно выдать')
+      }
+
+      const currentNominal = denominations[currentNominalIndex];
+      const сколькоМожемВзять = Math.floor(amountLeft / currentNominal); // 2550 / 1000
+      const max = Math.min(
+        сколькоМожемВзять,
+        availableNominal[currentNominal],
+      );
+
+      for (let count = max; count >= 0; count--) {
+        try {
+          const result = helper(amountLeft - currentNominal * count, currentNominalIndex + 1, availableNominal);
+          if (count > 0) result[currentNominal] = count;
+          return result;
+        } catch (error) {}
+      }
+    }
+
+    const available = {...this.obj};
+
+    // available сколько у нас всего номиналов
+    // начинаем с 0 индекса самого большого номинала
+    // передаем изначальную сумму
+    helper(amount, 0, available);
   }
 }
+
+// Цель: Разложить нужную сумму на доступные номиналы купюр,
+// чтобы выдать её максимально корректно, не превышая доступное количество каждой купюры.
+// Основная идея:
+// Начинай с самой крупной купюры и попробуй взять от 0
+// до максимально возможного числа этих купюр (не больше, чем доступно).
+// Для каждой попытки (например, взял 0, 1, 2, … купюр этого номинала) рекурсивно
+// пытайся собрать оставшуюся сумму с купюрами меньших номиналов.
+// Рекурсивный шаг:  Если сумма стала равна 0 – решение найдено!
+// Если закончились купюры (номиналы), а сумма больше 0 – пути дальше нет.
+// Иначе – для текущего номинала перебирай варианты (от 0 до min(доступных, сколько помещается в сумму)).
+// Для каждого варианта рекурсивно вызови алгоритм для оставшейся суммы и оставшихся купюр.
+
+// **Если на каком-то шаге рекурсия нашла решение, возвращай это решение вверх.
+// Если не получилось — пробуй другой вариант или возвращай «невозможно».
+// Обработка результата:
+// Если удалось найти разложение – возвращай, какие купюры и в каком количестве использовать.
 
 const atm = new ATM()
   .deposit(1000, 5)
@@ -38,4 +87,3 @@ const atm = new ATM()
 
 console.log(atm.withdraw(1550)); // { 1000: 1, 500: 1, 50: 1 }
 console.log(atm.withdraw(600)); // { 200: 3 }
-
