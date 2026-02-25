@@ -16,4 +16,3 @@ function extractKey(array, key) {
   }
   return result;
 };
-
