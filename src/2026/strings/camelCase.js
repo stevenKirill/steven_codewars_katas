@@ -18,6 +18,6 @@ function camelCase(n) {
   return result;
 }
 
-console.log(camelCase("Nice Challenge"));
+console.log(camelCase("Nice Challenge hello"));
 console.log(camelCase("String not found"));
 console.log(camelCase('Is not found '))

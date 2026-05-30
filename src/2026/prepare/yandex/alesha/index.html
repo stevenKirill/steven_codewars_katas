@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Справочник регулярных выражений</title>
+  <style>
+    mark {
+      background-color: #fff176;
+      padding: 0 1px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Regular Expressions Library</h1>
+  <search>
+    <form id="search">
+      <label for="search-input">Find pattern</label>
+      <input type="search" id="search-input" name="value" />
+      <button type="submit" id="search-submit">Search</button>
+    </form>
+  </search>
+  <ul id="list">
+    <li data-value="^[a-z]+$ - Match lowercase letters only">^[a-z]+$ - Match lowercase letters only</li>
+    <li data-value="^\d{3}-\d{4}$ - US phone format">^\d{3}-\d{4}$ - US phone format</li>
+    <li data-value="^https?://.* - HTTP/HTTPS URL">^https?://.* - HTTP/HTTPS URL</li>
+    <li data-value="^[A-Z][a-z]+$ - Capitalized word">^[A-Z][a-z]+$ - Capitalized word</li>
+    <li data-value="^\+?\d{1,3}[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$ - International phone">
+      ^\+?\d{1,3}[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$ - International phone</li>
+    <li data-value="^[\w.-]+@[\w.-]+\.\w+$ - Email address">^[\w.-]+@[\w.-]+\.\w+$ - Email address</li>
+    <li data-value="^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$ - IPv4 address">^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$ - IPv4
+      address</li>
+    <li data-value="^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$ - Hex color code">^#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$ - Hex
+      color code</li>
+    <li data-value="^\d{4}-\d{2}-\d{2}$ - ISO date format">^\d{4}-\d{2}-\d{2}$ - ISO date format</li>
+    <li data-value="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ - Full email">
+      ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ - Full email</li>
+    <li data-value="^(?=.*[A-Z])(?=.*\d).{8,}$ - Strong password">^(?=.*[A-Z])(?=.*\d).{8,}$ - Strong password</li>
+    <li
+      data-value="^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$ - URL">
+      ^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$ - URL</li>
+    <li data-value="^\[.*\]$ - Square brackets content">^\[.*\]$ - Square brackets content</li>
+    <li data-value="^\(.*\)$ - Parentheses content">^\(.*\)$ - Parentheses content</li>
+    <li data-value="^{.*}$ - Curly braces content">^{.*}$ - Curly braces content</li>
+    <li data-value="^<.*>$ - Angle brackets content">^<.*>$ - Angle brackets content</li>
+    <li data-value="^.*\.txt$ - Text file">^.*\.txt$ - Text file</li>
+    <li data-value="^.*\.(jpg|jpeg|png|gif)$ - Image file">^.*\.(jpg|jpeg|png|gif)$ - Image file</li>
+    <li data-value="^\d+$ - Integer only">^\d+$ - Integer only</li>
+    <li data-value="^\d*\.\d+$ - Decimal number">^\d*\.\d+$ - Decimal number</li>
+    <li data-value="^-?\d+$ - Signed integer">^-?\d+$ - Signed integer</li>
+    <li data-value="^[a-z]+$ - Lowercase letters">^[a-z]+$ - Lowercase letters</li>
+    <li data-value="^[A-Z]+$ - Uppercase letters">^[A-Z]+$ - Uppercase letters</li>
+    <li data-value="^[a-zA-Z]+$ - Any letters">^[a-zA-Z]+$ - Any letters</li>
+    <li data-value="^\w+$ - Word characters">^\w+$ - Word characters</li>
+    <li data-value="^\s+$ - Whitespace only">^\s+$ - Whitespace only</li>
+    <li data-value="^.{8,}$ - At least 8 characters">^.{8,}$ - At least 8 characters</li>
+    <li data-value="^.{3,16}$ - 3 to 16 characters">^.{3,16}$ - 3 to 16 characters</li>
+    <li data-value="^(male|female)$ - Gender values">^(male|female)$ - Gender values</li>
+    <li data-value="^(true|false)$ - Boolean values">^(true|false)$ - Boolean values</li>
+    <li data-value="^([01]?[0-9]|2[0-3]):[0-5][0-9]$ - 24-hour time">^([01]?[0-9]|2[0-3]):[0-5][0-9]$ - 24-hour time
+    </li>
+    <li data-value="^\d{5}(-\d{4})?$ - US ZIP code">^\d{5}(-\d{4})?$ - US ZIP code</li>
+    <li data-value="^[A-Z]{1,2}\d{1,2}[A-Z]?\s?\d[A-Z]{2}$ - UK postcode">^[A-Z]{1,2}\d{1,2}[A-Z]?\s?\d[A-Z]{2}$ - UK
+      postcode</li>
+    <li data-value="^\d{3}-\d{3}-\d{4}$ - Social Security format">^\d{3}-\d{3}-\d{4}$ - Social Security format</li>
+    <li data-value="^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$ - Email capture">
+      ^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$ - Email capture</li>
+    <li data-value="^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]+$ - YouTube URL">
+      ^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]+$ - YouTube URL</li>
+    <li data-value="^.*[0-9].*$ - Contains digit">^.*[0-9].*$ - Contains digit</li>
+    <li data-value="^.*[A-Z].*$ - Contains uppercase">^.*[A-Z].*$ - Contains uppercase</li>
+    <li data-value="^.*[a-z].*$ - Contains lowercase">^.*[a-z].*$ - Contains lowercase</li>
+    <li data-value="^.*[@#$%^&*].*$ - Contains special char">^.*[@#$%^&*].*$ - Contains special char</li>
+    <li data-value="^(?!.*(.)\1).*$ - No repeated characters">^(?!.*(.)\1).*$ - No repeated characters</li>
+    <li data-value="^\w+@\w+\.\w+$ - Simple email">^\w+@\w+\.\w+$ - Simple email</li>
+    <li data-value="^\d{2}\.\d{2}\.\d{4}$ - Russian date">^\d{2}\.\d{2}\.\d{4}$ - Russian date</li>
+    <li data-value="^\d{2}:\d{2}:\d{2}$ - Time format">^\d{2}:\d{2}:\d{2}$ - Time format</li>
+    <li data-value="^rgb\(\d+,\s*\d+,\s*\d+\)$ - RGB color">^rgb\(\d+,\s*\d+,\s*\d+\)$ - RGB color</li>
+    <li data-value="^rgba\(\d+,\s*\d+,\s*\d+,\s*[\d.]+\)$ - RGBA color">^rgba\(\d+,\s*\d+,\s*\d+,\s*[\d.]+\)$ - RGBA
+      color</li>
+    <li data-value="^\\d{3}$ - Backslash digit">^\\d{3}$ - Backslash digit</li>
+    <li data-value="^\[.*\]$ - Brackets">^\[.*\]$ - Brackets</li>
+    <li data-value="^\{.*\}$ - Braces">^\{.*\}$ - Braces</li>
+    <li data-value="^\(.*\)$ - Parens">^\(.*\)$ - Parens</li>
+    <li data-value="^\|.*\|$ - Pipe separators">^\|.*\|$ - Pipe separators</li>
+    <li data-value="^=.*=$ - Equal signs">^=.*=$ - Equal signs</li>
+    <li data-value="^\+.*\+$ - Plus signs">^\+.*\+$ - Plus signs</li>
+    <li data-value="^\*.*\*$ - Asterisks">^\*.*\*$ - Asterisks</li>
+    <li data-value="^\?.*\?$ - Question marks">^\?.*\?$ - Question marks</li>
+    <li data-value="^\^.*\^$ - Caret symbols">^\^.*\^$ - Caret symbols</li>
+    <li data-value="^\$.*$\$ - Dollar signs">^\$.*$\$ - Dollar signs</li>
+    <li data-value="^/.*/$ - Slash delimiters">^/.*/$ - Slash delimiters</li>
+    <li data-value="^%.*%$ - Percent signs">^%.*%$ - Percent signs</li>
+    <li data-value="^&.*&$ - Ampersand signs">^&.*&$ - Ampersand signs</li>
+    <li data-value="^#.*#$ - Hash signs">^#.*#$ - Hash signs</li>
+    <li data-value="^~.*~$ - Tilde signs">^~.*~$ - Tilde signs</li>
+    <li data-value="^`.*`$ - Backticks">^`.*`$ - Backticks</li>
+    <li data-value="^:.*:$ - Colon signs">^:.*:$ - Colon signs</li>
+    <li data-value="^;.*;$ - Semicolons">^;.*;$ - Semicolons</li>
+    <li data-value="^'.*'$ - Single quotes">^'.*'$ - Single quotes</li>
+    <li data-value="^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$ - Valid IPv4">
+      ^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$ - Valid IPv4</li>
+    <li data-value="^([a-fA-F0-9]{2}:){5}[a-fA-F0-9]{2}$ - MAC address">^([a-fA-F0-9]{2}:){5}[a-fA-F0-9]{2}$ - MAC
+      address</li>
+    <li data-value="^([0-9]{1,3}\.){3}[0-9]{1,3}$ - Simple IP">^([0-9]{1,3}\.){3}[0-9]{1,3}$ - Simple IP</li>
+    <li data-value="^[\w\.-]+[\.][\w\.-]+[\.][\w\.-]+$ - Domain">^[\w\.-]+[\.][\w\.-]+[\.][\w\.-]+$ - Domain</li>
+    <li
+      data-value="^((http|https):\/\/)?(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$ - Domain name">
+      ^((http|https):\/\/)?(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$
+      - Domain name</li>
+    <li data-value="^.{0}$ - Empty string">^.{0}$ - Empty string</li>
+    <li data-value="^.+$ - Non-empty string">^.+$ - Non-empty string</li>
+    <li data-value="^\w*$ - Word chars only">^\w*$ - Word chars only</li>
+    <li data-value="^\D+$ - Non-digits">^\D+$ - Non-digits</li>
+    <li data-value="^\W+$ - Non-word chars">^\W+$ - Non-word chars</li>
+    <li data-value="^\S+$ - Non-whitespace">^\S+$ - Non-whitespace</li>
+    <li data-value="^[^a-z]*$ - No lowercase">^[^a-z]*$ - No lowercase</li>
+    <li data-value="^[^A-Z]*$ - No uppercase">^[^A-Z]*$ - No uppercase</li>
+    <li data-value="^[^0-9]*$ - No digits">^[^0-9]*$ - No digits</li>
+    <li data-value="^(?!.*test).*$ - No 'test' word">^(?!.*test).*$ - No 'test' word</li>
+    <li data-value="^(?=.*[0-9])(?=.*[a-z]).{6,}$ - Digit + letter">^(?=.*[0-9])(?=.*[a-z]).{6,}$ - Digit + letter</li>
+    <li data-value="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$ - Upper + lower + digit">^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$
+      - Upper + lower + digit</li>
+    <li data-value="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$ - Complex password">
+      ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$ - Complex password</li>
+    <li data-value="^([a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*|"
+      (?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
+      - RFC 5322 email">
+      ^([a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
+      - RFC 5322 email</li>
+    <li data-value="^([a-z]+-)*[a-z]+$ - Hyphenated words">^([a-z]+-)*[a-z]+$ - Hyphenated words</li>
+    <li data-value="^(\w+\.)*\w+$ - Dot-separated words">^(\w+\.)*\w+$ - Dot-separated words</li>
+    <li data-value="^(\w+\/)*\w+$ - Path-like string">^(\w+\/)*\w+$ - Path-like string</li>
+    <li data-value="^\s*|\s*$ - Leading/trailing whitespace">^\s*|\s*$ - Leading/trailing whitespace</li>
+    <li data-value="^\d{1,3}(\.\d{1,3}){3}$ - IP with optional dots">^\d{1,3}(\.\d{1,3}){3}$ - IP with optional dots
+    </li>
+    <li data-value="^([a-z]:|\\|https?://) - Drive or protocol">^([a-z]:|\\|https?://) - Drive or protocol</li>
+    <li data-value="^.{1,3}$ - 1 to 3 chars">^.{1,3}$ - 1 to 3 chars</li>
+    <li data-value="^\d{1,}$ - Positive integer">^\d{1,}$ - Positive integer</li>
+    <li data-value="^-\d{1,}$ - Negative integer">^-\d{1,}$ - Negative integer</li>
+    <li data-value="^-?\d{1,}$ - Any integer">^-?\d{1,}$ - Any integer</li>
+    <li data-value="^\d{1,3}$ - 1 to 3 digit number">^\d{1,3}$ - 1 to 3 digit number</li>
+    <li data-value="^\d{4,6}$ - 4 to 6 digit number">^\d{4,6}$ - 4 to 6 digit number</li>
+    <li data-value="^([a-z]\d+|\d+[a-z])[a-z\d]*$ - Letter-digit combo">^([a-z]\d+|\d+[a-z])[a-z\d]*$ - Letter-digit
+      combo</li>
+    <li data-value="^\d*[13579]$ - Odd number">^\d*[13579]$ - Odd number</li>
+    <li data-value="^\d*[02468]$ - Even number">^\d*[02468]$ - Even number</li>
+    <li data-value="^([01]\d|2[0-3]):[0-5]\d$ - 24h time">^([01]\d|2[0-3]):[0-5]\d$ - 24h time</li>
+    <li data-value="^(0?[1-9]|1[0-2]):[0-5]\d\s?(AM|PM|am|pm)$ - 12h time">^(0?[1-9]|1[0-2]):[0-5]\d\s?(AM|PM|am|pm)$ -
+      12h time</li>
+    <li data-value="^([a-z]{2})-([A-Z]{2})$ - Language-country">^([a-z]{2})-([A-Z]{2})$ - Language-country</li>
+    <li data-value="^\d{1,2}\/\d{1,2}\/\d{2,4}$ - US date">^\d{1,2}\/\d{1,2}\/\d{2,4}$ - US date</li>
+    <li data-value="^\d{1,2}-\d{1,2}-\d{2,4}$ - EU date">^\d{1,2}-\d{1,2}-\d{2,4}$ - EU date</li>
+    <li data-value="^([a-z]{3}\s\d{1,2},\s\d{4})$ - Month day, year">^([a-z]{3}\s\d{1,2},\s\d{4})$ - Month day, year
+    </li>
+    <li data-value="^(\d{1,2}\s)?(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s\d{4}$ - Full date">
+      ^(\d{1,2}\s)?(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s\d{4}$ - Full date</li>
+    <li data-value="^[\w\.-]+@[\w\.-]+\.\w{2,4}$ - Simple email">^[\w\.-]+@[\w\.-]+\.\w{2,4}$ - Simple email</li>
+    <li data-value="^[\w\.-]+\.([a-z]{2,4})$ - Domain extension">^[\w\.-]+\.([a-z]{2,4})$ - Domain extension</li>
+    <li data-value="^([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$ - Multi-part domain">
+      ^([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$ - Multi-part domain</li>
+    <li data-value="^((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)$ - Strict IPv4">
+      ^((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)$ - Strict IPv4</li>
+    <li data-value="^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$ - MAC address hex">
+      ^([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2})$ - MAC address hex</li>
+    <li data-value="^([0-9a-fA-F]{4}\.){2}[0-9a-fA-F]{4}$ - IPv6 short">^([0-9a-fA-F]{4}\.){2}[0-9a-fA-F]{4}$ - IPv6
+      short</li>
+    <li data-value="^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$ - IPv6 full">^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$ -
+      IPv6 full</li>
+    <li data-value="^([a-z0-9!#$%&'*+\/=?^_`{|}~-]+(\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*|"
+      (([\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|[\x01-\x09\x0b\x0c\x0e-\x7f])*)")@(([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]([a-z0-9-]*[a-z0-9])?|(([0-9a-fA-F]{1,4}:){7}([0-9a-fA-F]{1,4}|:)|(([0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4})?::(([0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4})?))$
+      - Full email RFC">
+      ^([a-z0-9!#$%&'*+\/=?^_`{|}~-]+(\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*|"(([\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|[\x01-\x09\x0b\x0c\x0e-\x7f])*)")@(([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]([a-z0-9-]*[a-z0-9])?|(([0-9a-fA-F]{1,4}:){7}([0-9a-fA-F]{1,4}|:)|(([0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4})?::(([0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4})?))$
+      - Full email RFC</li>
+    <li data-value="^([a-z]{3,})$ - Min 3 letters">^([a-z]{3,})$ - Min 3 letters</li>
+    <li data-value="^(?=.*[a-z])(?=.*[A-Z]).{6,}$ - Mixed case">^(?=.*[a-z])(?=.*[A-Z]).{6,}$ - Mixed case</li>
+    <li data-value="^(?=.*\d).{4,}$ - Contains digit">^(?=.*\d).{4,}$ - Contains digit</li>
+    <li data-value="^(?=.*[!@#$%^&*]).{6,}$ - Contains special">^(?=.*[!@#$%^&*]).{6,}$ - Contains special</li>
+    <li data-value="^(?!.*(.)\1{2}).{4,}$ - No 3 repeats">^(?!.*(.)\1{2}).{4,}$ - No 3 repeats</li>
+    <li data-value="^([a-z0-9]|-)+$ - Alphanumeric with hyphens">^([a-z0-9]|-)+$ - Alphanumeric with hyphens</li>
+    <li data-value="^([a-z0-9_]+)$ - Underscore allowed">^([a-z0-9_]+)$ - Underscore allowed</li>
+    <li data-value="^([a-z0-9.-]+)$ - Dots and hyphens">^([a-z0-9.-]+)$ - Dots and hyphens</li>
+    <li data-value="^([a-z0-9+]+)$ - Plus signs">^([a-z0-9+]+)$ - Plus signs</li>
+    <li data-value="^([a-z0-9*]+)$ - Asterisks">^([a-z0-9*]+)$ - Asterisks</li>
+    <li data-value="^([a-z0-9?]+)$ - Question marks">^([a-z0-9?]+)$ - Question marks</li>
+    <li data-value="^([a-z0-9^]+)$ - Caret">^([a-z0-9^]+)$ - Caret</li>
+    <li data-value="^([a-z0-9$]+)$ - Dollar">^([a-z0-9$]+)$ - Dollar</li>
+    <li data-value="^([a-z0-9()]+)$ - Parentheses">^([a-z0-9()]+)$ - Parentheses</li>
+    <li data-value="^([a-z0-9\[\]]+)$ - Brackets">^([a-z0-9\[\]]+)$ - Brackets</li>
+    <li data-value="^([a-z0-9{}]+)$ - Braces">^([a-z0-9{}]+)$ - Braces</li>
+    <li data-value="^([a-z0-9|]+)$ - Pipes">^([a-z0-9|]+)$ - Pipes</li>
+    <li data-value="^([a-z0-9\\]+)$ - Backslash">^([a-z0-9\\]+)$ - Backslash</li>
+    <li data-value="^([a-z0-9/]+)$ - Forward slash">^([a-z0-9/]+)$ - Forward slash</li>
+    <li data-value="^([a-z0-9:]+)$ - Colons">^([a-z0-9:]+)$ - Colons</li>
+    <li data-value="^([a-z0-9;]+)$ - Semicolons">^([a-z0-9;]+)$ - Semicolons</li>
+    <li data-value="^([a-z0-9=]+)$ - Equals">^([a-z0-9=]+)$ - Equals</li>
+    <li data-value="^([a-z0-9']+)$ - Single quotes">^([a-z0-9']+)$ - Single quotes</li>
+    <li data-value="^([a-z0-9`]+)$ - Backticks">^([a-z0-9`]+)$ - Backticks</li>
+    <li data-value="^([a-z0-9~]+)$ - Tildes">^([a-z0-9~]+)$ - Tildes</li>
+    <li data-value="^([a-z0-9!]+)$ - Exclamation">^([a-z0-9!]+)$ - Exclamation</li>
+    <li data-value="^([a-z0-9@]+)$ - At signs">^([a-z0-9@]+)$ - At signs</li>
+    <li data-value="^([a-z0-9#]+)$ - Hash">^([a-z0-9#]+)$ - Hash</li>
+    <li data-value="^([a-z0-9%]+)$ - Percent">^([a-z0-9%]+)$ - Percent</li>
+    <li data-value="^([a-z0-9&]+)$ - Ampersand">^([a-z0-9&]+)$ - Ampersand</li>
+  </ul>
+
+  <script src="./index.js"></script>
+</body>
+
+</html>
